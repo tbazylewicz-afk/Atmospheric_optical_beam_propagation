@@ -6,7 +6,7 @@ from scipy import stats
 
 wavelength = 500e-9
 
-propagation_distance = 10000000.
+propagation_distance = 1000000.
 
 
 pxl_scale = 20 / 128
