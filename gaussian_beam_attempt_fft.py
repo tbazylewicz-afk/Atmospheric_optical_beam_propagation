@@ -4,11 +4,19 @@ from matplotlib import pyplot as plt
 """ initialization """
 
 # parameters
-N = 2048 # grid resolution (number of points)
-L = 200 # simulation window width
-lambd = 500e-7 # wavelength
+# N = 2048 # grid resolution (number of points)
+# L = 200 # simulation window width
+# lambd = 500e-7 # wavelength
+# dx = L / N # grid spacing
+# beam_waist = 0.2 # beam radius at its narrowest point
+# k = 2 * np.pi / lambd # wave number
+# z = 24622000 # distance at which E_out is computed
+
+N = 512 # grid resolution (number of points)
+L = 15 # simulation window width
+lambd = 500e-9 # wavelength
 dx = L / N # grid spacing
-beam_waist = 0.2 # beam radius at its narrowest point
+beam_waist = L / 5 # beam radius at its narrowest point
 k = 2 * np.pi / lambd # wave number
 z = 24622000 # distance at which E_out is computed
 
@@ -74,9 +82,12 @@ r = np.sqrt(X**2 + Y**2)
 I_analytical = I_0 * (w_0 / w_z)**2 * np.exp(-2 * r**2 / w_z**2)
 
 # plot comparing the cross-sections (our and analytical)
-plt.plot(x, np.abs(E_in[N//2, :])**2, label="numerical")
+plt.plot(x, np.abs(E_out[N//2, :])**2, label="numerical")
 plt.plot(x, I_analytical[N//2, :], label="analytical")
 plt.xlabel("x")
 plt.title(f"E_out cross-section comparison at y={N//2}, z={z}")
 plt.legend()
 plt.show()
+
+print(np.sum(np.abs(E_in)**2))
+print(np.sum(np.abs(E_out)**2))
